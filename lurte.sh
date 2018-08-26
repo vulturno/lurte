@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Loader from http://codingdiscovery.blogspot.com/2014/03/show-loading-dots-in-bash-script.html
+
 function lurte() {
     function openAemet() {
         #Aquí el año desde el que queremos descargar
@@ -48,8 +50,8 @@ function lurte() {
                   done < $i.json &&
                   # Eliminamos los archivos de los años ya que no nos sirven para nada
                   rm $i.json
-
-                  sleep 5s
+                    # Le damos un respiro a la API
+                  sleep 10s
         done
         # Al concatenar meses el objeto JSON no esta bien construido
         # Vamos a cambiar [] por ,
