@@ -53,11 +53,11 @@ function lurte() {
         sed -i '1 ! s/\[//' *.json &&
         # Concatenamos todos los JSON en el mismo archivo
         cat *.json > $total.json &&
-        sed -i '$ s/,/,]/' *.json &&
+        sed -i '$ s/,/,]/' $total.json &&
         # Eliminamos todos los JSON con los años enteros
         find . -name '*-entero*' -delete &&
         # Cambiamos el separador de coma por punto
-        sed -i 's/\([0-9]\),/\1\./g' *.json
+        sed -i 's/\([0-9]\),/\1\./g' $total.json
 
     }
 
