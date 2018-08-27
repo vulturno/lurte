@@ -1,6 +1,4 @@
-
-
-  function lurte() {
+function lurte() {
     function openAemet() {
         # El año desde el que queremos descargar
         from=1951
