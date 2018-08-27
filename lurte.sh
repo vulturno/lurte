@@ -15,7 +15,7 @@ function openAemet() {
     # Los años que queremos descargar
     i=$from
     while [ $i -le $to ]
-        do
+    do
         # Le pasamos un nombre al archivo que generaremos con todo el año
         entero="${i}-entero"
 
@@ -33,21 +33,22 @@ function openAemet() {
               --url 'https://opendata.aemet.es/opendata/api/valores/climatologicos/diarios/datos/fechaini/'${i}'-10-01T00:00:00UTC/fechafin/'${i}'-10-31T23:59:59UTC/estacion/'${station}'/?api_key='${apikey}''  >> $i.json && curl --silent --request GET --insecure \
               --url 'https://opendata.aemet.es/opendata/api/valores/climatologicos/diarios/datos/fechaini/'${i}'-11-01T00:00:00UTC/fechafin/'${i}'-11-30T23:59:59UTC/estacion/'${station}'/?api_key='${apikey}''  >> $i.json && curl --silent --request GET --insecure \
               --url 'https://opendata.aemet.es/opendata/api/valores/climatologicos/diarios/datos/fechaini/'${i}'-12-01T00:00:00UTC/fechafin/'${i}'-12-31T23:59:59UTC/estacion/'${station}'/?api_key='${apikey}'' >> $i.json &&
-             # El archivo que descargamos contiene demasiadas cosas que no sirven
-             # Vamos a quedarnos solo con la url de datos
-             sed -i '/descripcion/d;/estado/d;/metadatos/d' $i.json &&
-             sed -i 's/{//;s/}//;s/"//;s/ : //;s/datos//;s/",//;s/""//;s/  //' $i.json &&
-             # Ahora ejecutamos todas las url de datos de todo el año y descargamos su contenido en el mismo archivo
-             while read line; do
-                 # Eliminamos los archivos de los años ya que no nos sirven para nada
-                 rm -rf $i.json
-                 curl --silent --request GET --insecure "$line" >> $entero.json &&
-                 # Añadimos una coma al final de todos los archivos anuales para luego concatenar todos en el mismo archivo
-                 echo "," >> $entero.json
-             done < $i.json &&
-             # Le damos un respiro a la API, ya que nos baneara si hacemos demasiadas peticiones en poco tiempo
-             sleep 30
-        i=$((i+1))
+            # El archivo que descargamos contiene demasiadas cosas que no sirven
+            # Vamos a quedarnos solo con la url de datos
+            sed -i '/descripcion/d;/estado/d;/metadatos/d' $i.json &&
+            sed -i 's/{//;s/}//;s/"//;s/ : //;s/datos//;s/",//;s/""//;s/  //' $i.json &&
+            # Ahora ejecutamos todas las url de datos de todo el año y descargamos su contenido en el mismo archivo
+            while read line
+            do
+                # Eliminamos los archivos de los años ya que no nos sirven para nada
+                rm -rf $i.json
+                curl --silent --request GET --insecure "$line" >> $entero.json &&
+                # Añadimos una coma al final de todos los archivos anuales para luego concatenar todos en el mismo archivo
+                echo "," >> $entero.json
+            done < $i.json &&
+            # Le damos un respiro a la API, ya que nos baneara si hacemos demasiadas peticiones en poco tiempo
+            sleep 30
+            i=$((i+1))
         done
 
     # Al concatenar todos los meses el objeto JSON no esta bien construido
