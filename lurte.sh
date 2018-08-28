@@ -61,11 +61,15 @@ function openAemet() {
     sed -i '1 ! s/\[//' *.json &&
     # Concatenamos todos los JSON en el mismo archivo
     cat *.json > $total.json &&
-    sed -i '$ s/,/,]/' $total.json &&
+    sed -i '$ s/,/]/' $total.json &&
     # Eliminamos todos los JSON con los años enteros
     find . -name '*-entero*' -delete &&
     # Cambiamos el separador de coma por punto
-    sed -i 's/\([0-9]\),/\1\./g' $total.json
+    sed -i 's/\([0-9]\),/\1\./g' $total.json &&
+    # Eliminamos las comillas de los números
+    sed -r -i 's@"([0-9]+(\.[0-9]+)?)",\s*$@\1,@' $total.json &&
+    # Eliminamos el cero a la izquierda que esta en los resultados de la dirección de viento
+    sed -r -i 's/0*([0-9])/\1/' $total.json
 
 }
 
