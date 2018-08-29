@@ -5,21 +5,15 @@
 
 ## Indice
 
-- [¿Por que?](#¿Por-que?)
-- [Lo que necesitas](#Lo que necesitas)
-- [Uso](#Uso)
-- [Contribuye](#contribuye)
-- [Licencia](#licencia)
-
 <p align="center">
-  <a href="#¿Por-que">¿Por-que</a> •
+  <a href="#motivacion">Motivación</a> •
   <a href="#lo-que-necesitas">Lo que necesitas</a> •
   <a href="#uso">Uso</a> •
   <a href="#contribuye">Contribuye</a> •
   <a href="#licencia">Licencia</a>
 </p>
 
-## ¿Por que?
+## Motivación
 
 La limitación de la API y el terrible funcionamiento en cuanto a diseño y UX me ha llevado automatizar el proceso para conseguir más datos para [FORNO](https://forno.es). ¿Porque en Bash? Como loco de la automatización es lo que uso.
 
