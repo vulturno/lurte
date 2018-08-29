@@ -2,7 +2,28 @@
 
 > Un lurte (palabra que puede estar masculina u femenina) u lit (plural litz) ye o esplazamiento d'una important cantidat de nieu enta o cobaixo d'una ladera d'una montanya, que puede encorporar parti d'o sustrato y d'o cubrimiento vechetal d'a montanya. Pueden estar naturals u prevocatos por l'hombre.
 
-¿Que necesitas?
+
+## Indice
+
+- [¿Por que?](#¿Por-que?)
+- [Lo que necesitas](#Lo que necesitas)
+- [Uso](#Uso)
+- [Contribuye](#contribuye)
+- [Licencia](#licencia)
+
+<p align="center">
+  <a href="#¿Por-que">¿Por-que</a> •
+  <a href="#lo-que-necesitas">Lo que necesitas</a> •
+  <a href="#uso">Uso</a> •
+  <a href="#contribuye">Contribuye</a> •
+  <a href="#licencia">Licencia</a>
+</p>
+
+## ¿Por que?
+
+La limitación de la API y el terrible funcionamiento en cuanto a diseño y UX me ha llevado automatizar el proceso para conseguir más datos para [FORNO](https://forno.es). ¿Porque en Bash? Como loco de la automatización es lo que uso.
+
+## Lo que necesitas
 
 * Una apikey del open data de la [AEMET](https://opendata.aemet.es/centrodedescargas/inicio). Es gratuita.
 * El número de la estación. [Aquí tienes un listado con todas las estaciones y su número](https://github.com/jorgeatgu/lurte/blob/master/estaciones.json)
@@ -14,15 +35,28 @@ Los usuarios de macOS necesitan instalar SED de GNU a través de Homebrew
 brew install gnu-sed --default-names
 ```
 
-Una vez descargado el script para ejecutarlo solo tienes que hacer lo siguiente
+## Uso
+
+Lo primero descargate el script. Una vez descargado haz lo siguiente:
 
 ```
-./lurte.sh
+./lurte.sh [desde el año] [hasta el año] [número de estación]
+
+ Ejemplo:
+
+ ./lurte.sh 1980 1990 9434
 ```
 
+El script es un poco lento si el rango de años es grande, esta hecho así para que la API no te tire por exceso de peticiones. El tiempo de descarga estimado para un rango de años desde 1951 hasta 2018(804 ficheros) es de unos 30 minutos. El resultado final son todos los días de todos los años en un archivo con el nombre de la estación ```9434-total-diario.json```.
 
-El script es un poco lento si el rango de años es grande, esta hecho así para que la API no te tire por exceso de peticiones. Unos 30 minutos para descargarte desde 1951 hasta 2018, en total son 804 ficheros. Al final te lo concatena todo en el mismo(esto es configurable) con el nombre de la estación ```9434-total-diario.json```.
+## Contribuye
 
+[Abre una issue](https://github.com/RichardLitt/standard-readme/issues/new) o haz un PRs.
 
+### Contributors
 
+[Ekaitz Zarraga](https://github.com/ekaitz-zarraga) | [Jorge Aznar](https://github.com/jorgeatgu) 
 
+## Licencia
+
+[MIT](LICENSE) © Jorge Aznar
