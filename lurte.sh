@@ -38,8 +38,7 @@ function openAemet() {
               --url 'https://opendata.aemet.es/opendata/api/valores/climatologicos/diarios/datos/fechaini/'${i}'-12-01T00:00:00UTC/fechafin/'${i}'-12-31T23:59:59UTC/estacion/'${station}'/?api_key='${apikey}'' >> $i.json &&
             # El archivo que descargamos contiene demasiadas cosas que no sirven
             # Vamos a quedarnos solo con la url de datos
-            sed -i '/descripcion/d;/estado/d;/metadatos/d' $i.json &&
-            sed -i 's/{//;s/}//;s/"//;s/ : //;s/datos//;s/",//;s/""//;s/  //' $i.json &&
+            jq -r '.datos' $i.json > temp.json && mv temp.json $i.json &&
             # Ahora ejecutamos todas las url de datos de todo el año y descargamos su contenido en el mismo archivo
             while read line
             do
@@ -55,19 +54,21 @@ function openAemet() {
         done
 
     # Al concatenar todos los meses el objeto JSON no esta bien construido
-    # Primero eliminamos ], excepto el último que sirve para concatenar todos los archivos en el mismo
+    # Mierdas varias para que el JSON quede formateado conforme es debido
     sed -i 's/],/,/' *.json &&
-    # Eliminamos todos los [ excepto el primero que sirve para concatenar todos los archivos en el mismo
     sed -i '1 ! s/\[//' *.json &&
     # Concatenamos todos los JSON en el mismo archivo
     cat *.json > $total.json &&
+    # Mierdas varias para que el JSON final quede formateado conforme es debido
     sed -i '$ s/,/]/' $total.json &&
+    sed -i '$ s/],/,/' $total.json &&
+    sed -i '1 ! s/\[//' $total.json &&
     # Eliminamos todos los JSON con los años enteros
     find . -name '*-entero*' -delete &&
     # Cambiamos el separador de coma por punto
     sed -i 's/\([0-9]\),/\1\./g' $total.json &&
-    # Eliminamos las comillas de los números
-    sed -r -i 's@"([0-9]+(\.[0-9]+)?)",\s*$@\1,@' $total.json &&
+    # Eliminamos las comillas de los números, incluídos los negativos
+    sed -r -i 's@"(\-{0,1}[0-9]+(\.[0-9]+){0,1})",\s*$@\1,@' $total.json &&
     # Eliminamos el cero a la izquierda que esta en los resultados de la dirección de viento
     sed -r -i 's/0*([0-9])/\1/' $total.json
 
