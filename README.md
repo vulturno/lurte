@@ -19,7 +19,7 @@ La limitación de la API y el terrible funcionamiento en cuanto a diseño y UX m
 
 ## Lo que necesitas
 
-* Una apikey del open data de la [AEMET](https://opendata.aemet.es/centrodedescargas/inicio). Es gratuita.
+* Una apikey del open data de la [AEMET](https://opendata.aemet.es/centrodedescargas/inicio). Es gratuita. Y la tienes que agregar en la línea 4 del script.
 * El número de la estación. [Aquí tienes un listado con todas las estaciones y su número](https://github.com/jorgeatgu/lurte/blob/master/estaciones.json)
 * Y los años que quieres descargar. Hay que tener en cuenta que a partir de ciertos años la cantidad de datos que se recoge es mayor, en el caso de la estación del Aeropuerto de Zaragoza a partir de 1951 se recogen muchos más datos.
 
@@ -42,6 +42,17 @@ Lo primero descargate el script. Una vez descargado haz lo siguiente:
 ```
 
 El script es un poco lento si el rango de años es grande, esta hecho así para que la API no te tire por exceso de peticiones. El tiempo de descarga estimado para un rango de años desde 1951 hasta 2018(804 ficheros) es de unos 30 minutos. El resultado final son todos los días de todos los años en un archivo con el nombre de la estación ```9434-total-diario.json```.
+
+### Descargar un mes
+
+Para descargar solamente un mes hay que usar el script ```lurte-mes.sh```. Una vez descargado haz lo siguiente:
+
+```
+./lurte-mes.sh [nombre del mes en minúsculas] [año] [número de estación]
+
+Ejemplo:
+
+./lurte-mes.sh septiembre 2018 9434
 
 ## Contribuye
 
