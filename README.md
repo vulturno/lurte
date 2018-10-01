@@ -31,7 +31,9 @@ brew install gnu-sed --default-names
 
 ## Uso
 
-Lo primero descargate el script. Una vez descargado haz lo siguiente:
+### Descargar un rango de años
+
+Lo primero descargate el script ```lurte.sh``. Una vez descargado haz lo siguiente:
 
 ```
 ./lurte.sh [desde el año] [hasta el año] [número de estación]
