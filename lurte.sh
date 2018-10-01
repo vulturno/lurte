@@ -3,22 +3,6 @@
 # Introducir la API-key del servicio aquí:
 APIKEY=''
 
-if [ -z "$apikey"]
-then
-echo -e "
-\033[1;31m _________________________________________
-\033[1;31m|                                         |
-\033[1;31m|                                         |
-\033[1;31m|            ¡¡ERROR!!                    |
-\033[1;31m|                                         |
-\033[1;31m|_________________________________________|
-
-\033[1;31mNo has introducido ninguna APIKEY \033[0m
-
-\033[00;32mIncluye tu APIKEY en la variable de la línea 4 de lurte.sh"
-else
-    openAemet $1 $2 $3 & showLoading "$\033[00;35mDescargando todos los datos de la AEMET\033[0m"
-
 function openAemet() {
     # El año desde el que queremos descargar
     from=$1
@@ -129,3 +113,5 @@ then
     echo "$0 1951 1952 9434"
     exit 1
 fi
+
+openAemet $1 $2 $3 & showLoading "$\033[00;35mDescargando todos los datos de la AEMET\033[0m"
