@@ -119,5 +119,5 @@ showLoading() {
     \033[00;32mDescarga completada!\033[0m"
 }
 
-openAemet $1 $2 $3 & showLoading "\033[00;35mDescargando datos menusales desde la AEMET\033[0m"
+openAemet $1 $2 $3 & showLoading "\033[00;35mDescargando datos mensuales desde la AEMET\033[0m"
 
