@@ -3,6 +3,7 @@
 # Introducir la API-key del servicio aquí:
 APIKEY=''
 
+
 function openAemet() {
     # El año desde el que queremos descargar
     from=$1
