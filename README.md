@@ -31,9 +31,11 @@ brew install gnu-sed --default-names
 
 ## Uso
 
-### Descargar un rango de años
+### Descargar datos diarios de un rango de años
 
-Lo primero descargate el script ```lurte.sh``. Una vez descargado haz lo siguiente:
+Con este script te puedes descargar todos los datos diarios de una estación de la AEMET.
+
+Descarga el script ```lurte.sh```. Una vez descargado haz lo siguiente:
 
 ```
 ./lurte.sh [desde el año] [hasta el año] [número de estación]
@@ -43,7 +45,7 @@ Lo primero descargate el script ```lurte.sh``. Una vez descargado haz lo siguien
  ./lurte.sh 1980 1990 9434
 ```
 
-El script es un poco lento si el rango de años es grande, esta hecho así para que la API no te tire por exceso de peticiones. El tiempo de descarga estimado para un rango de años desde 1951 hasta 2018(804 ficheros) es de unos 30 minutos. El resultado final son todos los días de todos los años en un archivo con el nombre de la estación ```9434-total-diario.json```.
+El script es un poco lento si el rango de años es grande, esta hecho así para que la API no te tire por exceso de peticiones. El tiempo de descarga estimado para un rango de años desde 1951 hasta 2018(804 ficheros) es de unos 30 minutos. El resultado final son todos los días de todos los años en un archivo con el nombre de la estación, ejemplo: ```9434-total-diario.json```.
 
 ### Descargar un mes
 
@@ -55,6 +57,20 @@ Para descargar solamente un mes hay que usar el script ```lurte-mes.sh```. Una v
 Ejemplo:
 
 ./lurte-mes.sh septiembre 2018 9434
+```
+
+### Descargar datos anuales
+
+Con este script te descargas los resumenes mensuales de cada año.
+
+Descarga el script ```lurte-anual.sh```. Una vez descargado haz lo siguiente:
+
+```
+./lurte-anual.sh [desde el año] [hasta el año] [número de estación]
+
+ Ejemplo:
+
+ ./lurte-anual.sh 1980 1990 9434
 ```
 
 ## Contribuye
