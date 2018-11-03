@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Introducir la API-key del servicio aquí:
-APIKEY=''
-
-
 function openAemet() {
     # El año desde el que queremos descargar
     from=$1
@@ -12,14 +8,13 @@ function openAemet() {
     # El número de estación de la AEMET
     station=$3
     # La apikey del open data de la AEMET
-    apikey=$APIKEY
+    apikey=$APIKEY_AEMET
 
     # El nombre del archivo con todos los años
     total="${station}-total-diario"
     # Los años que queremos descargar
     i=$from
 
-    # https://opendata.aemet.es/opendata/api/valores/climatologicos/mensualesanuales/datos/anioini/1980/aniofin/1980/estacion/9434/?api_key=
         while [ $i -le $to ]
         do
             # Le pasamos un nombre al archivo que generaremos con todo el año
@@ -102,4 +97,4 @@ then
     exit 1
 fi
 
-openAemet $1 $2 $3 & showLoading "$\033[00;35mDescargando todos los datos de la AEMET\033[0m"
+openAemet $1 $2 $3 & showLoading "\033[00;35mDescargando todos los datos de la AEMET\033[0m"
