@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Introducir la API-key del servicio aquí:
-APIKEY=''
-
 function openAemet() {
     # El mes que queremos descargar
     mes=$1
@@ -11,7 +8,7 @@ function openAemet() {
     # El año que queremos descargar
     station=$3
     # La apikey del open data de la AEMET
-    apikey=$APIKEY
+    apikey=$APIKEY_AEMET
 
     # El nombre del archivo con todos los años
     total="${station}-${mes}"
@@ -56,7 +53,7 @@ function openAemet() {
           ;;
           octubre)
              curl --silent --request GET --insecure \
-                               --url 'https://opendata.aemet.es/opendata/api/valores/climatologicos/diarios/datos/fechaini/'${year}'-10-01T00:00:00UTC/fechafin/'${year}'-10-31T23:59:59UTC/estacion/'${station}'/?api_key='${apikey}''  >> $i.json
+                               --url 'https://opendata.aemet.es/opendata/api/valores/climatologicos/diarios/datos/fechaini/'${year}'-10-01T00:00:00UTC/fechafin/'${year}'-10-31T23:59:59UTC/estacion/'${station}'/?api_key='${apikey}''  >> $mes.json
           ;;
           noviembre)
              curl --silent --request GET --insecure \
@@ -120,4 +117,3 @@ showLoading() {
 }
 
 openAemet $1 $2 $3 & showLoading "\033[00;35mDescargando datos mensuales desde la AEMET\033[0m"
-
