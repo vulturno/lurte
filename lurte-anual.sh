@@ -45,7 +45,7 @@ function openAemet() {
         sed -i 's/],/,/' *.json &&
         sed -i '1 ! s/\[//' *.json &&
         # Concatenamos todos los JSON en el mismo archivo
-        find . -name '*-entero*' | xargs cat > $total.json &&
+        cat *-entero*.json > $total.json &&
         # Mierdas varias para que el JSON final quede formateado conforme es debido
         sed -i '$ s/,/]/' $total.json &&
         sed -i '$ s/],/,/' $total.json &&
