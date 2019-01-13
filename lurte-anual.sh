@@ -11,7 +11,7 @@ function openAemet() {
     apikey=$APIKEY_AEMET
 
     # El nombre del archivo con todos los años
-    total="${station}-total-diario"
+    total="${station}-total-anual"
     # Los años que queremos descargar
     i=$from
 
@@ -20,7 +20,7 @@ function openAemet() {
             # Le pasamos un nombre al archivo que generaremos con todo el año
             entero="${i}-entero"
 
-                # Los doce meses del año
+                # Consultamos el rango de años
                 curl --silent --request GET --insecure \
                   --url 'https://opendata.aemet.es/opendata/api/valores/climatologicos/mensualesanuales/datos/anioini/'${i}'/aniofin/'${i}'/estacion/'${station}'/?api_key='${apikey}''  >> $i.json &&
                 # El archivo que descargamos contiene demasiadas cosas que no sirven
@@ -45,13 +45,13 @@ function openAemet() {
         sed -i 's/],/,/' *.json &&
         sed -i '1 ! s/\[//' *.json &&
         # Concatenamos todos los JSON en el mismo archivo
-        cat *-entero*.json > $total.json &&
+        find . -name '*-entero*' | xargs cat > $total.json &&
         # Mierdas varias para que el JSON final quede formateado conforme es debido
         sed -i '$ s/,/]/' $total.json &&
         sed -i '$ s/],/,/' $total.json &&
         sed -i '1 ! s/\[//' $total.json &&
         # # Eliminamos todos los JSON con los años enteros
-        # find . -name '*-entero*' -delete &&
+        find . -name '*-entero*' -delete &&
         # Cambiamos el separador de coma por punto
         sed -i 's/\([0-9]\),/\1\./g' $total.json &&
         # Cambiamos Ip por 0 ver https://github.com/jorgeatgu/lurte/issues/9

@@ -48,7 +48,7 @@ function openAemet() {
                     echo "," >> $entero.json
                 done < $i.json &&
                 # Le damos un respiro a la API, ya que nos baneara si hacemos demasiadas peticiones en poco tiempo
-                sleep 30
+                sleep 15
                 i=$((i+1))
             done
 
@@ -57,7 +57,7 @@ function openAemet() {
         sed -i 's/],/,/' *.json &&
         sed -i '1 ! s/\[//' *.json &&
         # Concatenamos todos los JSON en el mismo archivo
-        cat *.json > $total.json &&
+        find . -name '*-entero*' | xargs cat > $total.json &&
         # Mierdas varias para que el JSON final quede formateado conforme es debido
         sed -i '$ s/,/]/' $total.json &&
         sed -i '$ s/],/,/' $total.json &&
@@ -77,24 +77,22 @@ function openAemet() {
 
 }
 
-fi
-
 showLoading() {
     mypid=$!
     loadingText=$1
 
-    echo -ne "$loadingText\r"
+    echo "$loadingText\r"
 
     while kill -0 $mypid 2>/dev/null
     do
-        echo -ne "$loadingText.\r"
+        echo "$loadingText.\r"
         sleep 0.5
-        echo -ne "$loadingText..\r"
+        echo "$loadingText..\r"
         sleep 0.5
-        echo -ne "$loadingText...\r"
+        echo "$loadingText...\r"
         sleep 0.5
-        echo -ne "\r\033[K"
-        echo -ne "$loadingText\r"
+        echo "\r\033[K"
+        echo "$loadingText\r"
         sleep 0.5
     done
 
@@ -111,4 +109,4 @@ then
     exit 1
 fi
 
-openAemet $1 $2 $3 & showLoading "$\033[00;35mDescargando todos los datos de la AEMET\033[0m"
+openAemet $1 $2 $3 & showLoading "\033[00;35mDescargando todos los datos de la AEMET\033[0m"
