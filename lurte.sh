@@ -15,6 +15,8 @@ function openAemet() {
     # Los años que queremos descargar
     i=$from
 
+    mkdir $station
+
 
         while [ $i -le $to ]
         do
@@ -46,9 +48,10 @@ function openAemet() {
                     curl --silent --request GET --insecure "$line" >> $entero.json &&
                     # Añadimos una coma al final de todos los archivos anuales para luego concatenar todos en el mismo archivo
                     echo "," >> $entero.json
+                    sleep 5s
                 done < $i.json &&
                 # Le damos un respiro a la API, ya que nos baneara si hacemos demasiadas peticiones en poco tiempo
-                sleep 25
+                sleep 20s &&
                 i=$((i+1))
             done
 
@@ -69,9 +72,13 @@ function openAemet() {
         # Cambiamos Ip por 0 ver https://github.com/jorgeatgu/lurte/issues/9
         sed -i 's/Ip/0/' $total.json &&
         # Eliminamos las comillas de los números, incluídos los negativos
-        sed -r -i 's@"(\-{0,1}[0-9]+(\.[0-9]+){0,1})",\s*$@\1,@' $total.json &&
+        sed -i -r 's/"([[:digit:]]+(\.[[:digit:]]+){0,1})"/\1/' $total.json &&
         # Eliminamos el cero a la izquierda que esta en los resultados de la dirección de viento
         sed -r -i 's/0*([0-9])/\1/' $total.json
+
+        ## Descomenta esto si vas a bajar muchas estaciones
+        # mv ~/github/lurte/$total.json ~/github/lurte/$station &&
+        # mv ~/github/lurte/$station ~/github/data
 
 
 

@@ -57,7 +57,7 @@ function openAemet() {
         # Cambiamos Ip por 0 ver https://github.com/jorgeatgu/lurte/issues/9
         sed -i 's/Ip/0/' $total.json &&
         # Eliminamos las comillas de los números, incluídos los negativos
-        sed -r -i 's@"(\-{0,1}[0-9]+(\.[0-9]+){0,1})",\s*$@\1,@' $total.json &&
+        sed -i -r 's/"([[:digit:]]+(\.[[:digit:]]+){0,1})"/\1/' $total.json &&
         # Eliminamos el cero a la izquierda que esta en los resultados de la dirección de viento
         sed -r -i 's/0*([0-9])/\1/' $total.json
 
