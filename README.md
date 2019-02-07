@@ -26,7 +26,7 @@ La limitación de la API y el terrible funcionamiento en cuanto a diseño y UX m
 Los usuarios de macOS necesitan instalar SED de GNU a través de Homebrew
 
 ```
-brew install gnu-sed --default-names
+brew install gnu-sed
 ```
 
 ## Uso
