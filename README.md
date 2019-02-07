@@ -25,6 +25,8 @@ La limitación de la API y el terrible funcionamiento en cuanto a diseño y UX m
 
 Los usuarios de macOS necesitan instalar SED de GNU a través de Homebrew
 
+Desde enero de 2019 homebrew ha eliminado el flag --default-names, así que para no usar el prefijo g hay que seguir estos pasos: https://apple.stackexchange.com/questions/69223/how-to-replace-mac-os-x-utilities-with-gnu-core-utilities/88812#88812
+
 ```
 brew install gnu-sed
 ```
