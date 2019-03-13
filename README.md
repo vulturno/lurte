@@ -24,6 +24,13 @@ La limitación de la API y el terrible funcionamiento en cuanto a diseño y UX m
 export APIKEY_AEMET=aquí-va-tu-apikey
 ```
 
+Y si esto te resulta tedioso, pues simplemente abre cada uno de los scripts y modifica la línea 3
+
+```
+Sustituyela por tu APIKEY
+apikey=$APIKEY_AEMET
+```
+
 * El número de la estación. [Aquí tienes un listado con todas las estaciones y su número](https://github.com/jorgeatgu/lurte/blob/master/estaciones.json)
 * Y los años que quieres descargar. Hay que tener en cuenta que a partir de ciertos años la cantidad de datos que se recoge es mayor, en el caso de la estación del Aeropuerto de Zaragoza a partir de 1951 se recogen muchos más datos.
 
