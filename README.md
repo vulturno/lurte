@@ -39,7 +39,7 @@ Los usuarios de macOS necesitan instalar SED de GNU a través de Homebrew
 
 Desde enero de 2019 homebrew ha eliminado el flag --default-names, así que para no usar el prefijo g hay que seguir estos pasos: https://apple.stackexchange.com/questions/69223/how-to-replace-mac-os-x-utilities-with-gnu-core-utilities/88812#88812
 
-```
+``` bash
 brew install gnu-sed
 ```
 
@@ -51,10 +51,10 @@ Con este script te puedes descargar todos los datos diarios de una estación de 
 
 Descarga el script ```lurte.sh```. Una vez descargado haz lo siguiente:
 
-```
+``` bash
 bash lurte.sh [desde el año] [hasta el año] [número de estación]
 
- Ejemplo:
+Ejemplo:
 
 bash lurte.sh 1980 1990 9434
 ```
@@ -65,7 +65,7 @@ El script es un poco lento si el rango de años es grande, esta hecho así para 
 
 Para descargar solamente un mes hay que usar el script ```lurte-mes.sh```. Una vez descargado haz lo siguiente:
 
-```
+``` bash
 bash lurte-mes.sh [nombre del mes en minúsculas] [año] [número de estación]
 
 Ejemplo:
@@ -79,7 +79,7 @@ Con este script te descargas los resumenes mensuales de cada año.
 
 Descarga el script ```lurte-anual.sh```. Una vez descargado haz lo siguiente:
 
-```
+``` bash
 bash lurte-anual.sh [desde el año] [hasta el año] [número de estación]
 
  Ejemplo:
