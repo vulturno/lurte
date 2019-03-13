@@ -5,8 +5,8 @@
 
 ## Indice
 
-<p align="center">
-  <a href="#motivacion">Motivación</a> •
+<p align="left">
+  <a href="#motivación">Motivación</a> •
   <a href="#lo-que-necesitas">Lo que necesitas</a> •
   <a href="#uso">Uso</a> •
   <a href="#contribuye">Contribuye</a> •
