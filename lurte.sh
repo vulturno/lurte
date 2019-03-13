@@ -83,12 +83,6 @@ function openAemet {
         # Eliminamos el cero a la izquierda que esta en los resultados de la dirección de viento
         sed -r -i 's/0*([0-9])/\1/' "$total".json
 
-        ## Descomenta esto si vas a bajar muchas estaciones
-        # mv ~/github/lurte/$total.json ~/github/lurte/$station &&
-        # mv ~/github/lurte/$station ~/github/data
-
-
-
 }
 
 showLoading() {
