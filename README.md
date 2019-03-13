@@ -19,7 +19,11 @@ La limitación de la API y el terrible funcionamiento en cuanto a diseño y UX m
 
 ## Lo que necesitas
 
-* Una apikey del open data de la [AEMET](https://opendata.aemet.es/centrodedescargas/inicio). Es gratuita. Y la tienes que agregar en la línea 4 del script.
+* Una apikey del open data de la [AEMET](https://opendata.aemet.es/centrodedescargas/inicio). Es gratuita. Y la tienes que agregar en la línea 3 de cada uno de los scripts. Algo más útil es incluirla en tu archivo de configuración de bash/fish/zshconfig. Por ejemplo yo lo tengo así con zsh
+```
+export APIKEY_AEMET=aquí-va-tu-apikey
+```
+
 * El número de la estación. [Aquí tienes un listado con todas las estaciones y su número](https://github.com/jorgeatgu/lurte/blob/master/estaciones.json)
 * Y los años que quieres descargar. Hay que tener en cuenta que a partir de ciertos años la cantidad de datos que se recoge es mayor, en el caso de la estación del Aeropuerto de Zaragoza a partir de 1951 se recogen muchos más datos.
 
