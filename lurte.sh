@@ -101,7 +101,7 @@ showLoading() {
     done
 
     echo "$loadingText...
-    \033[00;32mDescarga completada!\033[0m"
+    Descarga completada!"
 }
 
 if [ $# -ne 3 ]
