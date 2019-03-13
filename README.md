@@ -20,14 +20,15 @@ La limitación de la API y el terrible funcionamiento en cuanto a diseño y UX m
 ## Lo que necesitas
 
 * Una apikey del open data de la [AEMET](https://opendata.aemet.es/centrodedescargas/inicio). Es gratuita. Y la tienes que agregar en la línea 3 de cada uno de los scripts. Algo más útil es incluirla en tu archivo de configuración de bash/fish/zshconfig. Por ejemplo yo lo tengo así con zsh
-```
+
+``` bash
 export APIKEY_AEMET=aquí-va-tu-apikey
 ```
 
 Y si esto te resulta tedioso, pues simplemente abre cada uno de los scripts y modifica la línea 3
 
-```
-Sustituyela por tu APIKEY
+``` bash
+# Sustituyela por tu APIKEY
 apikey=$APIKEY_AEMET
 ```
 
