@@ -15,7 +15,7 @@
 
 ## Motivación
 
-La limitación de la API y el terrible funcionamiento en cuanto a diseño y UX me ha llevado automatizar el proceso para conseguir más datos para [FORNO](https://forno.es). ¿Porque en Bash? Como loco de la automatización es lo que uso.
+La limitación de la API y el terrible funcionamiento en cuanto a diseño y UX me ha llevado automatizar el proceso para conseguir más datos para [FORNO](https://forno.es).
 
 ## Lo que necesitas
 
