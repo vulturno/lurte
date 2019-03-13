@@ -1,5 +1,17 @@
 #!/bin/bash
 
+apikey=$APIKEY_AEMET
+
+error="
+La APIKEY esta vacía, sin APIKEY no puedes obtener ningún dato.
+Echale un ojo al README: https://github.com/vulturno/lurte#lo-que-necesitas
+"
+
+if [ -z "$apikey" ]; then
+      printf "%b\n" "\e[31m$error"
+      exit
+fi
+
 function openAemet {
     # El mes que queremos descargar
     mes=$1
@@ -7,8 +19,6 @@ function openAemet {
     year=$2
     # El año que queremos descargar
     station=$3
-    # La apikey del open data de la AEMET
-    apikey=$APIKEY_AEMET
 
     read -r "$1"
       case $1 in
