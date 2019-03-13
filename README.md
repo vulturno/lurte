@@ -40,11 +40,11 @@ Con este script te puedes descargar todos los datos diarios de una estación de 
 Descarga el script ```lurte.sh```. Una vez descargado haz lo siguiente:
 
 ```
-./lurte.sh [desde el año] [hasta el año] [número de estación]
+bash lurte.sh [desde el año] [hasta el año] [número de estación]
 
  Ejemplo:
 
- ./lurte.sh 1980 1990 9434
+bash lurte.sh 1980 1990 9434
 ```
 
 El script es un poco lento si el rango de años es grande, esta hecho así para que la API no te tire por exceso de peticiones. El tiempo de descarga estimado para un rango de años desde 1951 hasta 2018(804 ficheros) es de unos 30 minutos. El resultado final son todos los días de todos los años en un archivo con el nombre de la estación, ejemplo: ```9434-total-diario.json```.
@@ -54,11 +54,11 @@ El script es un poco lento si el rango de años es grande, esta hecho así para 
 Para descargar solamente un mes hay que usar el script ```lurte-mes.sh```. Una vez descargado haz lo siguiente:
 
 ```
-./lurte-mes.sh [nombre del mes en minúsculas] [año] [número de estación]
+bash lurte-mes.sh [nombre del mes en minúsculas] [año] [número de estación]
 
 Ejemplo:
 
-./lurte-mes.sh septiembre 2018 9434
+bash lurte-mes.sh septiembre 2018 9434
 ```
 
 ### Descargar datos anuales
@@ -68,11 +68,11 @@ Con este script te descargas los resumenes mensuales de cada año.
 Descarga el script ```lurte-anual.sh```. Una vez descargado haz lo siguiente:
 
 ```
-./lurte-anual.sh [desde el año] [hasta el año] [número de estación]
+bash lurte-anual.sh [desde el año] [hasta el año] [número de estación]
 
  Ejemplo:
 
- ./lurte-anual.sh 1980 1990 9434
+bash lurte-anual.sh 1980 1990 9434
 ```
 
 ## Contribuye
