@@ -96,7 +96,9 @@ function openAemet {
       sed -i -r 's/"(\-{0,1}[[:digit:]]+(\.[[:digit:]]+){0,1})"/\1/' "$mes".json &&
       # Eliminamos el cero a la izquierda que esta en los resultados de la dirección de viento
       sed -r -i 's/0*([0-9])/\1/' "$mes".json &&
-      sed -i '1d' "$mes".json
+      sed -i '1d' "$mes".json &&
+      cp "$mes.json" "$station"-"$mes".json &&
+      rm "$mes".json
 
 }
 
