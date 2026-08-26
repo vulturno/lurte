@@ -1,48 +1,59 @@
-bash lurte-mes.sh marzo 2019 8175 &&
-bash lurte-mes.sh marzo 2019 8025 &&
-bash lurte-mes.sh marzo 2019 1387 &&
-bash lurte-mes.sh marzo 2019 2444 &&
-bash lurte-mes.sh marzo 2019 4452 &&
-bash lurte-mes.sh marzo 2019 0076 &&
-bash lurte-mes.sh marzo 2019 1082 &&
-bash lurte-mes.sh marzo 2019 2331 &&
-bash lurte-mes.sh marzo 2019 3469A &&
-bash lurte-mes.sh marzo 2019 8500A &&
-bash lurte-mes.sh marzo 2019 4121 &&
-bash lurte-mes.sh marzo 2019 5402 &&
-bash lurte-mes.sh marzo 2019 8096 &&
-bash lurte-mes.sh marzo 2019 1024E &&
-bash lurte-mes.sh marzo 2019 0367 &&
-bash lurte-mes.sh marzo 2019 5514 &&
-bash lurte-mes.sh marzo 2019 C649I &&
-bash lurte-mes.sh marzo 2019 4642E &&
-bash lurte-mes.sh marzo 2019 9898 &&
-bash lurte-mes.sh marzo 2019 5960 &&
-bash lurte-mes.sh marzo 2019 2661 &&
-bash lurte-mes.sh marzo 2019 9771C &&
-bash lurte-mes.sh marzo 2019 9170 &&
-bash lurte-mes.sh marzo 2019 3195 &&
-bash lurte-mes.sh marzo 2019 6155A &&
-bash lurte-mes.sh marzo 2019 B278 &&
-bash lurte-mes.sh marzo 2019 6000A &&
-bash lurte-mes.sh marzo 2019 7031 &&
-bash lurte-mes.sh marzo 2019 1690A &&
-bash lurte-mes.sh marzo 2019 1690B &&
-bash lurte-mes.sh marzo 2019 1249I &&
-bash lurte-mes.sh marzo 2019 9262 &&
-bash lurte-mes.sh marzo 2019 1484C &&
-bash lurte-mes.sh marzo 2019 0016A &&
-bash lurte-mes.sh marzo 2019 2867 &&
-bash lurte-mes.sh marzo 2019 1109 &&
-bash lurte-mes.sh marzo 2019 1428 &&
-bash lurte-mes.sh marzo 2019 2465 &&
-bash lurte-mes.sh marzo 2019 5783 &&
-bash lurte-mes.sh marzo 2019 2030 &&
-bash lurte-mes.sh marzo 2019 C447A &&
-bash lurte-mes.sh marzo 2019 3260B &&
-bash lurte-mes.sh marzo 2019 8416 &&
-bash lurte-mes.sh marzo 2019 2539 &&
-bash lurte-mes.sh marzo 2019 9091O &&
-bash lurte-mes.sh marzo 2019 2400E &&
-bash lurte-mes.sh marzo 2019 6325O &&
-bash lurte-mes.sh marzo 2019 9434
+#!/bin/bash
+
+: '
+Descarga un mes completo de todas las estaciones que usamos en vulturno.
+
+Uso: bash download-data-month.sh [mes en minúsculas] [año]
+Ejemplo: bash download-data-month.sh julio 2026
+
+Los archivos se generan en el directorio desde el que se lanza el script.
+'
+
+mes=$1
+year=$2
+
+if [ -z "$mes" ] || [ -z "$year" ]; then
+    printf "%b\n" "\e[31mUso: bash download-data-month.sh [mes en minúsculas] [año]"
+    printf "%b\n" "\e[31mEjemplo: bash download-data-month.sh julio 2026"
+    exit 1
+fi
+
+# La ruta de lurte-mes.sh, así podemos lanzar el script desde cualquier directorio
+directorio=$(cd "$(dirname "$0")" && pwd)
+
+# El listado de estaciones de la AEMET que descargamos cada mes
+# Pamplona (9262) volvió a servir datos en 2026 y se reincorporó al listado
+# 1249I (Oviedo) y 1690B siguen sin servir datos: fallan siempre, no es un error
+estaciones=(
+    8175 8025 1387 2444 4452 0076 1082 2331 3469A 8500A
+    4121 5402 8096 1024E 0367 5514 C649I 4642E 9898 5960
+    2661 9771C 9170 3195 6155A B278 6000A 7031 1690A 1690B
+    1249I 1484C 0016A 2867 1109 1428 2465 5783 2030 C447A
+    3260B 8416 2539 9091O 2400E 6325O 9434 9262
+)
+
+total=${#estaciones[@]}
+fallidas=()
+
+for ((i = 0; i < total; i++)); do
+    estacion=${estaciones[$i]}
+
+    echo "[$((i + 1))/$total] Descargando $estacion - $mes $year"
+
+    if ! bash "$directorio"/lurte-mes.sh "$mes" "$year" "$estacion"; then
+        fallidas+=("$estacion")
+    fi
+
+    # La AEMET limita el número de peticiones, esperamos entre estación y estación
+    if [ "$i" -lt $((total - 1)) ]; then
+        sleep 10
+    fi
+done
+
+if [ ${#fallidas[@]} -eq 0 ]; then
+    printf "%b\n" "\e[35mDescargadas las $total estaciones de $mes de $year"
+else
+    printf "%b\n" "\e[31mHan fallado ${#fallidas[@]} estaciones de $mes de $year: ${fallidas[*]}"
+    printf "%b\n" "\e[31mPuedes repetirlas una a una con: bash lurte-mes.sh $mes $year [estación]"
+    exit 1
+fi
